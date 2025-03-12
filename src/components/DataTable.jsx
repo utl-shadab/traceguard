@@ -123,7 +123,7 @@ const QRCodeTable = () => {
     <div className="bg-white p-6 rounded-lg shadow-md">
       {/* Table Header */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">QR Code Management</h2>
+        <h2 className="text-lg font-semibold">QR Code</h2>
 
         {/* Search Input */}
         <div className="relative">
