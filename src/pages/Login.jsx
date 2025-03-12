@@ -6,6 +6,7 @@ import { LucideMail, LucideLock } from "lucide-react";
 import loginIllustration from "../assets/login-illustration.svg";
 import logo from "../assets/logo.png";
 import InputField from "../components/ui/InputField";
+import Checkbox from "../components/ui/Checkbox";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,11 +15,11 @@ function Login() {
 
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
   const validatePassword = (password) => password.length >= 6;
-
+  const [isChecked, setIsChecked] = useState(false);
   const handleLogin = (e) => {
     e.preventDefault();
     if (validateEmail(email) && validatePassword(password)) {
-      alert(`Email: ${email}\nPassword: ${password}`); // Show credentials for now
+      alert(`Email: ${email}\nPassword: ${password}`);
       localStorage.setItem("isAuthenticated", "true");
       navigate("/");
     } else {
@@ -28,20 +29,15 @@ function Login() {
 
   return (
     <div className="h-screen flex">
-      {/* Left Side - Illustration */}
       <div className="hidden md:flex w-1/2 bg-[#F8F9FC] items-center justify-center">
         <img src={loginIllustration} alt="Login Illustration" className="w-3/4" />
       </div>
-
-      {/* Right Side - Login Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-6">
         <div className="w-full max-w-md">
           <img src={logo} alt=" Logo" className="w-40 mb-4" />
 
           <h2 className="text-2xl font-bold text-gray-800">Welcome  </h2>
           <p className="text-gray-500 mb-6">Your Admin Dashboard</p>
-
-          {/* Social Login */}
           <div className="flex space-x-4 mb-6">
             <button className="flex items-center justify-center w-1/2 px-4 py-2 border rounded-lg shadow-sm text-gray-700 hover:bg-gray-100">
               <FcGoogle className="text-xl mr-2" /> Google
@@ -56,7 +52,6 @@ function Login() {
             <div className="absolute top-1/2 left-0 w-full border-b border-gray-200"></div>
           </div>
 
-          {/* Login Form */}
           <form onSubmit={handleLogin} className=" mt-4 space-y-4">
             <div>
               <label className="block text-gray-700 font-medium">Username</label>
@@ -82,9 +77,9 @@ function Login() {
             </div>
 
             <div className="flex justify-between items-center text-sm text-gray-600">
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                Remember this Device
+              <label className="flex items-center cursor-pointer space-x-2">
+                <Checkbox checked={isChecked} onChange={setIsChecked} color="blue" />
+                <span className="text-gray-700 font-medium">Remember this Device</span>
               </label>
               <a href="#" className="text-blue-500 hover:underline">Forgot Password?</a>
             </div>
@@ -93,8 +88,6 @@ function Login() {
               Sign in
             </button>
           </form>
-
-          {/* Sign Up Link */}
           <p className="text-center text-sm text-gray-600 mt-4">
             New to ? <a href="#" className="text-blue-500 hover:underline">Create an account</a>
           </p>

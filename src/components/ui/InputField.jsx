@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { LucideMail, LucideLock, LucideCheckCircle, LucideXCircle } from "lucide-react";
+import { LucideCheckCircle, LucideXCircle } from "lucide-react";
 
-function InputField({ type, placeholder, value, onChange, icon: Icon, validate }) {
+function InputField({ type, placeholder, value, onChange, icon: Icon, validate = () => true }) {
   const [touched, setTouched] = useState(false);
-  const isValid = validate(value);
+  const isValid = validate(value); // Now, `validate` is always a function
   const isInvalid = touched && !isValid;
 
   return (
     <div className="relative w-full">
       {/* Left Icon */}
-      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-        <Icon size={18} />
-      </span>
+      {Icon && (
+        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <Icon size={18} />
+        </span>
+      )}
 
       {/* Input Field */}
       <input

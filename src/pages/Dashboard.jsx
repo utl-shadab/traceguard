@@ -3,7 +3,8 @@ import Threshold from '../components/Threshold';
 import { LucideAlertCircle, LucideBarcode, LucideQrCode, LucideRotateCcw, } from 'lucide-react';
 
 import QRCodeVolumeChart from '../components/charts/QRCodeVolumeChart';
-import DataTable from '../components/DataTable';
+import DataTable from '../components/Tables/DataTable';
+// import CustomTable from '../components/Tables/CustomTable';
 
 const cardData = [
   {
@@ -51,6 +52,7 @@ const Dashboard = () => {
       </div>
       <QRCodeVolumeChart />
       <DataTable />
+      {/* <CustomTable/> */}
     </div>
   )
 }
