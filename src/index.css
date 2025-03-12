@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('/font/MyCustomFont.woff2') format('woff2'),
+         url('/fonts/MyCustomFont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    /* Colors */
+    --color-primary: #3352CC;
+    --color-primary-light: #4F6AE5;
+    --color-primary-dark: #29419F;
+   
+    --color-secondary: #1F2A3F;
+    --color-secondary-light: #2D384D;
+    --color-secondary-dark: #151D2D;
+   
+    --color-accent: #4A4FE4;
+   
+    --color-white: #ffffff;
+    --color-black: #000000;
+   
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+   
+    /* Sidebar */
+    --sidebar-width-expanded: 240px;
+    --sidebar-width-collapsed: 60px;
+   
+    /* Animation */
+    --transition-speed: 250ms;
+    --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --font-custom: 'MyCustomFont', sans-serif;
+}
+
+@layer base {
+    html {
+        font-family: var(--font-custom);
+    }
+   
+    body {
+        @apply bg-gray-100 text-gray-800;
+    }
+   
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-medium;
+    }
+   
+    h1 {
+        @apply text-2xl;
+    }
+   
+    h2 {
+        @apply text-xl;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@layer components {
+    .btn {
+        @apply px-4 py-2 rounded font-medium transition-all duration-200;
+    }
+   
+    .btn-primary {
+        @apply bg-blue-600 text-white hover:bg-blue-700;
+    }
+   
+    .btn-secondary {
+        @apply bg-gray-700 text-white hover:bg-gray-800;
+    }
+   
+    .card {
+        @apply bg-white rounded-md shadow-lg p-4;
+    }
+   
+    .form-input {
+        @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-600;
+    }
+}
