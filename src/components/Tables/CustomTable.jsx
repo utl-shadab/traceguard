@@ -3,10 +3,10 @@ import { LucideEdit, LucideDownload, LucidePlus, LucideSearch } from "lucide-rea
 import Papa from "papaparse";
 import ReactPaginate from "react-paginate";
 import CustomModal from "../Modal/CustomModal";
-import Checkbox from "../ui/Checkbox"; 
+import Checkbox from "../ui/Checkbox";
 import InnerModalInputs from "../Modal/InnerModalInputs";
 
-const CustomTable = ({ columns, data, title, onAdd }) => {
+const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable }) => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +18,7 @@ const CustomTable = ({ columns, data, title, onAdd }) => {
       JSON.stringify(item).toLowerCase().includes(search.toLowerCase())
     );
   }, [search, data]);
+
 
   const downloadCSV = () => {
     const csvData = Papa.unparse(filteredData);
@@ -32,12 +33,136 @@ const CustomTable = ({ columns, data, title, onAdd }) => {
   const handleEditClick = (row) => {
     setSelectedRow(row);
     setIsModalOpen(true);
+
+    setFormData({
+      companyName: row.name,
+      companyDisplayName: row.displayName,
+      prefix: row.prefix,
+      email: row.email,
+      phone: row.phone,
+      websiteUrl: row.websiteUrl,
+      smsMobile: row.smsMobile,
+      whatsappMobile: row.whatsappMobile,
+      loyaltyThrough: row.loyaltyThrough,
+      redemptionType: row.redemptionType,
+      active: row.active,
+      services: row.services,
+    });
   };
 
   const handleCloseModal = () => {
     setSelectedRow(null);
     setIsModalOpen(false);
   };
+
+  const options = ["Scratch", "QR Code"];
+  // Form State
+  const [formData, setFormData] = useState({
+    companyName: "",
+    companyDisplayName: "",
+    prefix: "",
+    email: "",
+    phone: "",
+    websiteUrl: "",
+    smsMobile: "",
+    whatsappMobile: "",
+    loyaltyThrough: options[0],
+    redemptionType: [],
+    active: false,
+    services: {
+      scmService: false,
+      warrantyService: false,
+      smsAuthentication: false,
+      whatsappService: false,
+      pdfGeneration: false,
+      loyalty: false,
+
+    },
+  });
+
+  const onSave = () => {
+
+    if (!formData.companyName.trim() || !formData.companyDisplayName.trim()) {
+      alert("Company Name and Company Display Name are required.");
+      return;
+    }
+    if (!formData.prefix.trim()) {
+      alert("prefix is required.");
+    }
+    if (!formData.email.trim()) {
+      alert("Email is required.");
+      return;
+    }
+    if (!formData.phone.trim()) {
+      alert("Phone is required.");
+      return;
+    }
+
+    // Retrieve existing data from localStorage
+    const storedData = localStorage.getItem("companyData");
+    let companyData = storedData ? JSON.parse(storedData) : [];
+
+    // Check for duplicates
+    const isDuplicate = companyData.some(
+      (company) =>
+        company.name === formData.companyName ||
+        company.displayName === formData.companyDisplayName
+    );
+
+    if (isDuplicate) {
+      alert("Company Name or Company Display Name already exists.");
+      return;
+    }
+
+    // Add new data to the array
+    const newCompany = {
+      id: companyData.length + 1, // Generate a unique ID
+      name: formData.companyName,
+      displayName: formData.companyDisplayName,
+      prefix: formData.prefix,
+      email: formData.email,
+      phone: formData.phone,
+      websiteUrl: formData.websiteUrl,
+      smsMobile: formData.smsMobile,
+      whatsappMobile: formData.whatsappMobile,
+      loyaltyThrough: formData.loyaltyThrough,
+      redemptionType: formData.redemptionType,
+      active: formData.active,
+      services: formData.services,
+    };
+
+    companyData.push(newCompany);
+
+    // Save updated data back to localStorage
+    localStorage.setItem("companyData", JSON.stringify(companyData));
+
+    // Reset form fields
+    setFormData({
+      companyName: "",
+      companyDisplayName: "",
+      prefix: "",
+      email: "",
+      phone: "",
+      websiteUrl: "",
+      smsMobile: "",
+      whatsappMobile: "",
+      loyaltyThrough: options[0],
+      redemptionType: [],
+      active: false,
+      services: {
+        scmService: false,
+        warrantyService: false,
+        smsAuthentication: false,
+        whatsappService: false,
+        pdfGeneration: false,
+        loyalty: false,
+      },
+    });
+
+    handleCloseModal();
+    setUpdateTable(!updateTable);
+    alert("company details saved successfully.");
+  }
 
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -99,7 +224,7 @@ const CustomTable = ({ columns, data, title, onAdd }) => {
                 <td key={col.accessor} className="p-3 text-sm">
                   {/* If "Active" column, show a real checkbox */}
                   {col.accessor === "active" ? (
-                    <Checkbox checked={row[col.accessor]} onChange={() => {}} color="blue" />
+                    <Checkbox checked={row[col.accessor]} onChange={() => { }} color="blue" />
                   ) : (
                     row[col.accessor]
                   )}
@@ -133,11 +258,12 @@ const CustomTable = ({ columns, data, title, onAdd }) => {
 
       {isModalOpen && (
         <CustomModal
+          onSave={onSave}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           title={selectedRow ? `Edit ${title}` : `Add ${title}`}
         >
-         <InnerModalInputs/>
+          <InnerModalInputs formData={formData} setFormData={setFormData} />
         </CustomModal>
       )}
     </div>

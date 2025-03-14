@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LucideCheckCircle, LucideXCircle } from "lucide-react";
 
-function InputField({ type, placeholder, value, onChange, icon: Icon, validate = () => true }) {
+function InputField({ type, placeholder, value, onChange, name, icon: Icon, validate = () => true }) {
   const [touched, setTouched] = useState(false);
   const isValid = validate(value); // Now, `validate` is always a function
   const isInvalid = touched && !isValid;
@@ -20,6 +20,7 @@ function InputField({ type, placeholder, value, onChange, icon: Icon, validate =
         type={type}
         placeholder={placeholder}
         value={value}
+        name={name}
         onChange={(e) => {
           onChange(e);
           setTouched(true);

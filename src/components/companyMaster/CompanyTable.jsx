@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomTable from "../Tables/CustomTable";
 
-const companyData = [
-  { id: 1, name: "Binario Technologies", displayName: "Binario Technologies", prefix: "BT", active: true },
-];
+// const companyData = [
+//   { id: 1, name: "Binario Technologies", displayName: "Binario Technologies", prefix: "BT", active: true },
+// ];
 
 const companyColumns = [
   { Header: "ID", accessor: "id" },
@@ -14,10 +14,28 @@ const companyColumns = [
 ];
 
 const CompanyTable = () => {
+
+  const [updateTable, setUpdateTable] = useState(false);
+  const [companyData, setCompanyData] = useState([]);
+
+  useEffect(() => {
+
+    const storedData = localStorage.getItem("companyData");
+
+    if (storedData) {
+      setCompanyData(JSON.parse(storedData));
+    }
+    else {
+      setCompanyData([]);
+    }
+  }, [updateTable]);
+
   return (
     <CustomTable
       columns={companyColumns}
       data={companyData}
+      setUpdateTable={setUpdateTable}
+      updateTable={updateTable}
       title="Company"
       onAdd={() => alert("New Company Added")}
     />

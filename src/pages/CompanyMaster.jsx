@@ -4,7 +4,7 @@ import CompanyTable from '../components/companyMaster/CompanyTable'
 const CompanyMaster = () => {
   return (
     <div>
-      <CompanyTable/>
+      <CompanyTable />
     </div>
   )
 }

@@ -6,7 +6,7 @@ const CustomModal = ({ isOpen, onClose, title, children, onSave }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-start top-10 justify-center z-50" >
+    <div className="fixed inset-0 flex items-start top-10 justify-center z-50 overflow-auto" >
       <motion.div
         initial={{ scale: 0.7, opacity: 0, y: "-20%" }}
         animate={{ scale: 1, opacity: 1, y: "0%" }}
