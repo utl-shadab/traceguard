@@ -22,7 +22,7 @@ const Stepper = ({ steps, currentStep, onStepChange }) => {
                 : "border-gray-300 bg-gray-100 text-gray-400"
               }`}
             onClick={() => handleStepClick(index)}
-          >
+          > 
             {/* Step Number */}
             <motion.span
               initial={{ scale: 0.8 }}
@@ -30,7 +30,7 @@ const Stepper = ({ steps, currentStep, onStepChange }) => {
               className={`w-5 h-5 flex text-xs items-center justify-center rounded-full border-2 font-semibold transition-all duration-300 ${index === currentStep
                 ? "border-blue-500 text-blue-600"
                 : index < currentStep
-                  ? "border-blue-500  bg-blue-500 text-white"
+                  ? "border-blue-500  bg-[#06D6AE] text-white"
                   : "border-gray-300 text-gray-400"
                 }`}
             >
@@ -44,7 +44,7 @@ const Stepper = ({ steps, currentStep, onStepChange }) => {
           {/* Horizontal Line */}
           {index < steps.length - 1 && (
             <div
-              className={`flex-1 h-px mx-2 ${index < currentStep ? "bg-blue-500" : "bg-black"
+              className={`flex-1 h-px mx-2 ${index < currentStep ? "bg-[#06D6AE]" : "bg-black"
                 }`}
             ></div>
           )}

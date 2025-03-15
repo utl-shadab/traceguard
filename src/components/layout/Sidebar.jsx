@@ -1,13 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   LucideHome, LucideBuilding, LucideBox, LucideUsers, LucideTag,
   LucideDatabase, LucideShieldCheck, LucideLogOut, LucideSettings, LucideChevronDown, LucideChevronRight,
-  LogIn
+  LogIn, X
 } from 'lucide-react';
 import UserImage from "../../assets/user.webp";
 import { useSidebar } from '../../context/SidebarContext';
-import Logo from "../../assets/logo.png"
+import Logo from "../../assets/logo.webp"
 
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', path: '/', icon: <LucideHome size={20} /> },
@@ -58,7 +58,7 @@ const menuItems = [
 ];
 
 function Sidebar() {
-  const { isCollapsed } = useSidebar();
+  const { isCollapsed, isMobile, isSidebarOpen, toggleSidebar } = useSidebar();
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
 
@@ -66,17 +66,41 @@ function Sidebar() {
     setOpenMenu((prev) => (prev === id ? null : id));
   };
 
+  // Close any open submenus when sidebar collapses
+  useEffect(() => {
+    if (isCollapsed) {
+      setOpenMenu(null);
+    }
+  }, [isCollapsed]);
+
+  // Handle sidebar visibility and size based on device
+  const sidebarWidth = isCollapsed ? 'w-14' : 'w-72';
+  const sidebarVisibility = isMobile && !isSidebarOpen ? '-translate-x-full' : 'translate-x-0';
+
   return (
-    <div className={`bg-white text-black fixed h-full flex flex-col justify-between transition-all duration-300 ease-in-out ${isCollapsed ? 'w-14' : 'w-72'}`}>
+    <div className={`bg-white text-black fixed h-full flex flex-col justify-between transition-all duration-300 ease-in-out z-50 ${sidebarWidth} ${sidebarVisibility}`}>
+      {/* Mobile close button - shown only on mobile when sidebar is open */}
+      {isMobile && isSidebarOpen && (
+        <>
+        
+        <button 
+          onClick={toggleSidebar}
+          className="absolute top-3 right-3 p-1 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+          aria-label="Close sidebar"
+        >
+          <X size={20} />
+        </button>
+        </>
+      )}
       
       <div>
-        <div className="flex h-16 items-center justify-center border-b border-gray-300">
-          <div className="flex items-center justify-center px-4">
-            <img src={Logo} alt="Logo" className={`transition-all duration-300 ease-in-out ${isCollapsed ? 'w-8' : 'w-28'}`} />
+        <div className={`flex ${isCollapsed ? 'h-14' : 'h-20'} items-center justify-center ${isMobile ? 'border-none mt-16' : ''} border-b border-gray-300`}>
+          <div className={`flex items-center justify-center px-4 `}>
+            <img src={Logo} alt="Logo" className={`transition-all duration-300 ease-in-out ${isCollapsed ? 'w-10 h-10 object-cover' : 'w-20'}`} />
           </div>
         </div>
         
-        <div className="py-4 overflow-y-auto h-[calc(100vh-13rem)]">
+        <div className="py-1 overflow-y-auto h-[calc(100vh-13rem)]">
           <ul className="space-y-3 px-2">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.path;
@@ -88,7 +112,7 @@ function Sidebar() {
                   {hasSubmenu ? (
                     <button
                       className={`flex items-center justify-between p-2.5 rounded-md transition-all duration-700 ease-in-out w-full 
-                      ${isActive ? 'bg-blue-600 text-white' : 'hover:bg-[#5d87ff20] hover:text-[#5D87FF] text-black'}`}
+                      ${isActive ? 'bg-[#5765F6] text-white' : 'hover:bg-[#5d87ff20] hover:text-[#5D87FF] text-black'}`}
                       onClick={() => toggleMenu(item.id)}
                     >
                       <div className="flex items-center">
@@ -105,7 +129,7 @@ function Sidebar() {
                     <Link
                       to={item.path}
                       className={`flex items-center p-2.5 rounded-md transition-all duration-700 ease-in-out w-full 
-                      ${isActive ? 'bg-blue-600 text-white' : 'hover:bg-[#5d87ff20] hover:text-[#5D87FF] text-black'}`}
+                      ${isActive ? 'bg-[#5765F6] text-white' : 'hover:bg-[#5d87ff20] hover:text-[#5D87FF] text-black'}`}
                     >
                       {item.icon}
                       {!isCollapsed && <span className="ml-3">{item.label}</span>}
@@ -141,7 +165,7 @@ function Sidebar() {
       {/* User Profile Section (Bottom Fixed) */}
       <div className="p-3">
         {!isCollapsed ? (
-          <div className="flex items-center bg-blue-50 p-2 rounded-lg">
+          <div className="flex items-center bg-[#06D6AE] p-2 rounded-lg">
             <img src={UserImage} alt="User" className="w-10 h-10 rounded-full" />
             <div className="ml-3">
               <h4 className="text-black font-medium">John Doe</h4>

@@ -1,10 +1,11 @@
 import React from 'react'
+import CompanyTable from '../components/companyMaster/CompanyTable'
 
 const PriceMaster = () => {
   return (
-    <div className='text-3xl text-red-800'>
-      hejkfdhjkfdhfde
-    </div>
+    <div>
+    <CompanyTable />
+ </div>
   )
 }
 

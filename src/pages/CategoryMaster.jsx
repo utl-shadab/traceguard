@@ -1,9 +1,10 @@
 import React from 'react'
+import CompanyTable from '../components/companyMaster/CompanyTable'
 
 const CategoryMaster = () => {
   return (
     <div>
-      
+       <CompanyTable />
     </div>
   )
 }

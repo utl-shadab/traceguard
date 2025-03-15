@@ -35,7 +35,7 @@ const CustomModal = ({ isOpen, onClose, title, children, onSave }) => {
           </button>
           <button
             onClick={onSave}
-            className="px-4 py-2 bg-blue-600 text-white font-semibold cursor-pointer rounded-md hover:bg-blue-700 transition"
+            className="px-4 py-2 bg-[#5765F6] text-white font-semibold cursor-pointer rounded-md hover:bg-blue-700 transition"
           >
             Save Changes
           </button>

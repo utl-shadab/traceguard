@@ -61,7 +61,7 @@ const Dropzone = ({ onUpload }) => {
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${uploadProgress}%` }}
-            className="h-1 bg-blue-600 mt-2"
+            className="h-1 bg-[#5765F6] mt-2"
           />
         )}
       </div>

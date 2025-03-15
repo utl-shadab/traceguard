@@ -11,7 +11,7 @@ const cardData = [
     title: "Issued QR Codes",
     value: "1.2M",
     icon: <LucideBarcode className="text-white" size={24} />,
-    bgColor: "bg-blue-600 text-white",
+    bgColor: "bg-[#5765F6] text-white",
     textColor: "text-white",
     change: "+3.8%",
     changeType: "up",

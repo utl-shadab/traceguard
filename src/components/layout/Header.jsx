@@ -1,13 +1,13 @@
 import { useSidebar } from '../../context/SidebarContext';
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bell, LucideMail, User } from "lucide-react";
+import { Bell, LucideMail, User, Menu, X } from "lucide-react";
 import UserImage from "../../assets/user.webp";
 
 function Header() {
   const [isNotificationOpen, setNotificationOpen] = useState(false);
   const [isProfileOpen, setProfileOpen] = useState(false);
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, isMobile, isSidebarOpen } = useSidebar();
   const notificationRef = useRef(null);
   const profileRef = useRef(null);
 
@@ -46,15 +46,20 @@ function Header() {
   }, []);
 
   return (
-    <header className="h-16 bg-white border-b py-3 border-gray-200  flex items-center justify-between px-6 sticky top-0 z-50">
+    <header className="h-16 bg-white border-b py-3 border-gray-200 flex items-center justify-between px-6 sticky top-0 z-40">
       <div className="flex items-center">
-        <button onClick={toggleSidebar} className="p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button onClick={toggleSidebar} className="p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none transition-all">
+          {isMobile && isSidebarOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </div>
-      <div className="text-lg font-semibold text-gray-800">BINARIO TECHNOLOGIES</div>
+      
+      {/* Company name - hide on smallest screens */}
+      <div className="text-lg font-semibold text-gray-800 hidden sm:block">BINARIO TECHNOLOGIES</div>
+      
       <div className="flex items-center space-x-6">
         
         {/* Notification Dropdown */}
@@ -76,11 +81,11 @@ function Header() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 150, damping: 20 }}
-                className="absolute right-0 mt-3 w-80 bg-white shadow-lg rounded-lg p-4"
+                className="absolute right-0 mt-3 w-80 max-w-[calc(100vw-2rem)] bg-white shadow-lg rounded-lg p-4"
               >
                 <div className="flex justify-between items-center">
                   <h4 className="text-lg font-semibold">Notification</h4>
-                  <span className="bg-blue-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  <span className="bg-[#06D6AE] text-white text-xs font-semibold px-2 py-0.5 rounded-full">
                     {notifications.length} new
                   </span>
                 </div>
@@ -113,7 +118,7 @@ function Header() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 150, damping: 20 }}
-                className="absolute right-0 mt-3 w-80 bg-white shadow-lg rounded-lg p-4"
+                className="absolute right-0 mt-3 w-80 max-w-[calc(100vw-2rem)] bg-white shadow-lg rounded-lg p-4"
               >
                 <div className="flex items-center mt-3 space-x-4">
                   <img src={UserImage} alt="User" className="w-14 h-14 rounded-full border border-gray-300" />
@@ -127,14 +132,14 @@ function Header() {
                 </div>
                 <div className="mt-4 space-y-2">
                   <div className="flex items-center p-3 rounded-md cursor-pointer hover:bg-gray-100 transition-all">
-                    <User className="w-5 h-5 text-blue-500" />
+                    <User className="w-5 h-5 text-[#5765F6]" />
                     <div className="ml-3">
                       <p className="font-medium text-gray-800">My Profile</p>
                       <p className="text-sm text-gray-500">Account settings</p>
                     </div>
                   </div>
                 </div>
-                <button className="w-full mt-4 text-blue-600 font-semibold py-2 border border-blue-500 rounded-lg hover:bg-blue-100 transition-all">
+                <button className="w-full mt-4 text-[#5765F6] font-semibold py-2 border border-[#5765F6] rounded-lg hover:bg-blue-100 transition-all">
                   Logout
                 </button>
               </motion.div>

@@ -172,7 +172,13 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
     <div className="bg-white p-6 rounded-lg shadow-md">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">{title}</h2>
+      <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center px-3 py-2 bg-[#5765F6] text-white font-semibold rounded-md hover:bg-blue-700 transition"
+          >
+            <LucidePlus size={16} className="mr-2" />
+            Add {title}
+          </button>
 
         {/* Search Input */}
         <div className="relative">
@@ -188,13 +194,7 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
 
         {/* Buttons */}
         <div className="flex space-x-2">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center px-3 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
-          >
-            <LucidePlus size={16} className="mr-2" />
-            Add {title}
-          </button>
+        
 
           <button
             onClick={downloadCSV}
@@ -251,7 +251,7 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
           pageCount={pageCount}
           onPageChange={({ selected }) => setCurrentPage(selected)}
           containerClassName="flex space-x-2"
-          activeClassName="text-white bg-blue-500 rounded px-3 py-1"
+          activeClassName="text-white bg-[#06D6AE] rounded px-3 py-1"
           pageClassName="px-3 py-1 border rounded"
         />
       </div>

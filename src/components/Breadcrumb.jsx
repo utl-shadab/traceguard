@@ -7,7 +7,7 @@ const Breadcrumb = ({ title, backgroundImage }) => {
 
   return (
     <div
-      className="flex items-center justify-between p-6 rounded-lg bg-blue-50 mb-5 shadow-md w-full"
+      className="flex items-center justify-between p-6 rounded-lg bg-[#06D6AE] mb-5 shadow-md w-full"
       style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "contain", backgroundPosition: "right", backgroundRepeat: "no-repeat" }}
     >
       <div>

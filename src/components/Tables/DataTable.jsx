@@ -138,7 +138,7 @@ const QRCodeTable = () => {
         </div>
 
         {/* Download CSV Button */}
-        <button onClick={downloadCSV} className="p-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
+        <button onClick={downloadCSV} className="p-2 bg-[#06D6AE] text-white rounded-lg shadow-md hover:bg-[#5765F6]">
           <LucideDownload size={18} />
         </button>
       </div>
@@ -177,7 +177,7 @@ const QRCodeTable = () => {
           pageCount={Math.ceil(filteredData.length / 5)}
           onPageChange={({ selected }) => setGlobalFilter(selected)}
           containerClassName="flex space-x-2"
-          activeClassName="text-white bg-blue-500 rounded px-3 py-1"
+          activeClassName="text-white bg-[#06D6AE] rounded px-3 py-1"
           pageClassName="px-3 py-1 border rounded"
         />
       </div>
