@@ -205,7 +205,10 @@ function Sidebar() {
           </div>
         </div>
 
-        <div className="py-1 h-[calc(100vh-13rem)]">
+        <div
+          className={`py-1 h-[calc(100vh-13rem)] ${
+            !isCollapsed ? "overflow-y-auto" : ""
+          }`}>
           <ul className="space-y-3 px-2">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.path;
