@@ -20,14 +20,6 @@ const CustomTable = ({
   setUpdateTable,
   updateTable,
 }) => {
-const CustomTable = ({
-  columns,
-  data,
-  title,
-  onAdd,
-  setUpdateTable,
-  updateTable,
-}) => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -206,7 +198,6 @@ const CustomTable = ({
     setUpdateTable(!updateTable);
     alert("company details saved successfully.");
   };
-  };
 
   const pageCount = Math.ceil(sortedAndFilteredData.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -222,13 +213,6 @@ const CustomTable = ({
           <LucidePlus size={16} className="mr-2" />
           Add {title}
         </button>
-      <div className="flex gap-4 flex-wrap justify-between items-center mb-4">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="flex items-center px-3 py-2 bg-[#5765F6] text-white font-semibold rounded-md hover:bg-blue-700 transition">
-          <LucidePlus size={16} className="mr-2" />
-          Add {title}
-        </button>
 
         <div className="flex gap-4">
           {/* Search Input */}
@@ -245,33 +229,14 @@ const CustomTable = ({
               className="absolute left-3 top-2.5 text-gray-500"
             />
           </div>
-        <div className="flex gap-4">
-          {/* Search Input */}
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="pl-10 pr-4 py-2 border rounded-md focus:outline-none w-full"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <LucideSearch
-              size={18}
-              className="absolute left-3 top-2.5 text-gray-500"
-            />
-          </div>
 
-          {/* Buttons */}
-          {/* <div className="flex space-x-2"> */}
           {/* Buttons */}
           {/* <div className="flex space-x-2"> */}
           <button
             onClick={downloadCSV}
             className="p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
-            className="p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             <LucideDownload size={18} />
           </button>
-          {/* </div> */}
           {/* </div> */}
         </div>
       </div>
@@ -360,7 +325,6 @@ const CustomTable = ({
           onSave={onSave}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          title={selectedRow ? `Edit ${title}` : `Add ${title}`}>
           title={selectedRow ? `Edit ${title}` : `Add ${title}`}>
           <InnerModalInputs formData={formData} setFormData={setFormData} />
         </CustomModal>
