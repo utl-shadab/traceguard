@@ -14,11 +14,46 @@ import ReactPaginate from "react-paginate";
 
 // Sample QR Code Data
 const qrData = [
-  { id: 1, code: "QR-001", type: "Generated", status: "Active", scans: 256, lastScan: "2 hours ago" },
-  { id: 2, code: "QR-002", type: "Fake", status: "Blocked", scans: 150, lastScan: "4 hours ago" },
-  { id: 3, code: "QR-003", type: "Returned", status: "Inactive", scans: 180, lastScan: "1 day ago" },
-  { id: 4, code: "QR-004", type: "Generated", status: "Active", scans: 300, lastScan: "30 minutes ago" },
-  { id: 5, code: "QR-005", type: "Damaged", status: "Inactive", scans: 50, lastScan: "5 days ago" },
+  {
+    id: 1,
+    code: "QR-001",
+    type: "Generated",
+    status: "Active",
+    scans: 256,
+    lastScan: "2 hours ago",
+  },
+  {
+    id: 2,
+    code: "QR-002",
+    type: "Fake",
+    status: "Blocked",
+    scans: 150,
+    lastScan: "4 hours ago",
+  },
+  {
+    id: 3,
+    code: "QR-003",
+    type: "Returned",
+    status: "Inactive",
+    scans: 180,
+    lastScan: "1 day ago",
+  },
+  {
+    id: 4,
+    code: "QR-004",
+    type: "Generated",
+    status: "Active",
+    scans: 300,
+    lastScan: "30 minutes ago",
+  },
+  {
+    id: 5,
+    code: "QR-005",
+    type: "Damaged",
+    status: "Inactive",
+    scans: 50,
+    lastScan: "5 days ago",
+  },
 ];
 
 // Table Columns for QR Management
@@ -36,8 +71,7 @@ const qrColumns = [
             : value === "Blocked"
             ? "bg-red-100 text-red-600"
             : "bg-gray-100 text-gray-600"
-        }`}
-      >
+        }`}>
         {value}
       </span>
     ),
@@ -55,21 +89,30 @@ const qrColumns = [
         <Menu.Items className="absolute right-0 mt-2 w-32 bg-white border rounded-lg shadow-lg z-10">
           <Menu.Item>
             {({ active }) => (
-              <button className={`flex items-center w-full px-4 py-2 text-sm ${active ? "bg-gray-100" : ""}`}>
+              <button
+                className={`flex items-center w-full px-4 py-2 text-sm ${
+                  active ? "bg-gray-100" : ""
+                }`}>
                 <LucidePlus size={16} className="mr-2" /> Add
               </button>
             )}
           </Menu.Item>
           <Menu.Item>
             {({ active }) => (
-              <button className={`flex items-center w-full px-4 py-2 text-sm ${active ? "bg-gray-100" : ""}`}>
+              <button
+                className={`flex items-center w-full px-4 py-2 text-sm ${
+                  active ? "bg-gray-100" : ""
+                }`}>
                 <LucideEdit size={16} className="mr-2" /> Edit
               </button>
             )}
           </Menu.Item>
           <Menu.Item>
             {({ active }) => (
-              <button className={`flex items-center w-full px-4 py-2 text-sm text-red-500 ${active ? "bg-gray-100" : ""}`}>
+              <button
+                className={`flex items-center w-full px-4 py-2 text-sm text-red-500 ${
+                  active ? "bg-gray-100" : ""
+                }`}>
                 <LucideTrash2 size={16} className="mr-2" /> Delete
               </button>
             )}
@@ -122,53 +165,68 @@ const QRCodeTable = () => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       {/* Table Header */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">QR Code</h2>
 
-        {/* Search Input */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="pl-10 pr-4 py-2 border rounded-md focus:outline-none"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <LucideSearch size={18} className="absolute left-3 top-2.5 text-gray-500" />
-        </div>
+        <div className="flex items-center gap-4">
+          {/* Search Input */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-10 pr-4 py-2 border rounded-md focus:outline-none w-full"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <LucideSearch
+              size={18}
+              className="absolute left-3 top-2.5 text-gray-500"
+            />
+          </div>
 
-        {/* Download CSV Button */}
-        <button onClick={downloadCSV} className="p-2 bg-[#06D6AE] text-white rounded-lg shadow-md hover:bg-[#5765F6]">
-          <LucideDownload size={18} />
-        </button>
+          {/* Download CSV Button */}
+          <button
+            onClick={downloadCSV}
+            className="p-2 bg-[#06D6AE] text-white rounded-lg shadow-md hover:bg-[#5765F6]">
+            <LucideDownload size={18} />
+          </button>
+        </div>
       </div>
 
       {/* Table */}
-      <table {...getTableProps()} className="w-full border-collapse">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()} className="border-b">
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()} className="text-left p-3 text-sm font-semibold">
-                  {column.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} className="border-b hover:bg-gray-100">
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} className="p-3 text-sm">{cell.render("Cell")}</td>
+      <div className="overflow-auto">
+        <table {...getTableProps()} className="w-full border-collapse ">
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()} className="border-b">
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps()}
+                    className="text-left p-3 text-sm font-semibold">
+                    {column.render("Header")}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className="border-b hover:bg-gray-100">
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()} className="p-3 text-sm">
+                      {cell.render("Cell")}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">

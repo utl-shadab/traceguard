@@ -1,12 +1,24 @@
 import React, { useState, useMemo } from "react";
-import { LucideEdit, LucideDownload, LucidePlus, LucideSearch } from "lucide-react";
+import {
+  LucideEdit,
+  LucideDownload,
+  LucidePlus,
+  LucideSearch,
+} from "lucide-react";
 import Papa from "papaparse";
 import ReactPaginate from "react-paginate";
 import CustomModal from "../Modal/CustomModal";
 import Checkbox from "../ui/Checkbox";
 import InnerModalInputs from "../Modal/InnerModalInputs";
 
-const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable }) => {
+const CustomTable = ({
+  columns,
+  data,
+  title,
+  onAdd,
+  setUpdateTable,
+  updateTable,
+}) => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +30,6 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
       JSON.stringify(item).toLowerCase().includes(search.toLowerCase())
     );
   }, [search, data]);
-
 
   const downloadCSV = () => {
     const csvData = Papa.unparse(filteredData);
@@ -76,12 +87,10 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
       whatsappService: false,
       pdfGeneration: false,
       loyalty: false,
-
     },
   });
 
   const onSave = () => {
-
     if (!formData.companyName.trim() || !formData.companyDisplayName.trim()) {
       alert("Company Name and Company Display Name are required.");
       return;
@@ -162,7 +171,7 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
     handleCloseModal();
     setUpdateTable(!updateTable);
     alert("company details saved successfully.");
-  }
+  };
 
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -171,78 +180,86 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-      <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center px-3 py-2 bg-[#5765F6] text-white font-semibold rounded-md hover:bg-blue-700 transition"
-          >
-            <LucidePlus size={16} className="mr-2" />
-            Add {title}
-          </button>
+      <div className="flex gap-4 flex-wrap justify-between items-center mb-4">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center px-3 py-2 bg-[#5765F6] text-white font-semibold rounded-md hover:bg-blue-700 transition">
+          <LucidePlus size={16} className="mr-2" />
+          Add {title}
+        </button>
 
-        {/* Search Input */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="pl-10 pr-4 py-2 border rounded-md focus:outline-none"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <LucideSearch size={18} className="absolute left-3 top-2.5 text-gray-500" />
-        </div>
+        <div className="flex gap-4">
+          {/* Search Input */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-10 pr-4 py-2 border rounded-md focus:outline-none w-full"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <LucideSearch
+              size={18}
+              className="absolute left-3 top-2.5 text-gray-500"
+            />
+          </div>
 
-        {/* Buttons */}
-        <div className="flex space-x-2">
-        
-
+          {/* Buttons */}
+          {/* <div className="flex space-x-2"> */}
           <button
             onClick={downloadCSV}
-            className="p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-          >
+            className="p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             <LucideDownload size={18} />
           </button>
+          {/* </div> */}
         </div>
       </div>
 
       {/* Table */}
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="border-b bg-gray-100">
-            {columns.map((col) => (
-              <th key={col.accessor} className="p-3 text-left text-sm font-semibold">
-                {col.Header}
-              </th>
-            ))}
-            <th className="p-3 text-left text-sm font-semibold">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentPageData.map((row) => (
-            <tr key={row.id} className="border-b hover:bg-gray-100">
+      <div className="overflow-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b bg-gray-100">
               {columns.map((col) => (
-                <td key={col.accessor} className="p-3 text-sm">
-                  {/* If "Active" column, show a real checkbox */}
-                  {col.accessor === "active" ? (
-                    <Checkbox checked={row[col.accessor]} onChange={() => { }} color="blue" />
-                  ) : (
-                    row[col.accessor]
-                  )}
-                </td>
+                <th
+                  key={col.accessor}
+                  className="p-3 text-left text-sm font-semibold">
+                  {col.Header}
+                </th>
               ))}
-              <td className="p-3 text-sm">
-                {/* Edit Button - Opens Blank Modal */}
-                <button
-                  onClick={() => handleEditClick(row)}
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  <LucideEdit size={18} />
-                </button>
-              </td>
+              <th className="p-3 text-left text-sm font-semibold">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentPageData.map((row) => (
+              <tr key={row.id} className="border-b hover:bg-gray-100">
+                {columns.map((col) => (
+                  <td key={col.accessor} className="p-3 text-sm">
+                    {/* If "Active" column, show a real checkbox */}
+                    {col.accessor === "active" ? (
+                      <Checkbox
+                        checked={row[col.accessor]}
+                        onChange={() => {}}
+                        color="blue"
+                      />
+                    ) : (
+                      row[col.accessor]
+                    )}
+                  </td>
+                ))}
+                <td className="p-3 text-sm">
+                  {/* Edit Button - Opens Blank Modal */}
+                  <button
+                    onClick={() => handleEditClick(row)}
+                    className="text-blue-500 hover:text-blue-700">
+                    <LucideEdit size={18} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
@@ -261,8 +278,7 @@ const CustomTable = ({ columns, data, title, onAdd, setUpdateTable, updateTable 
           onSave={onSave}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          title={selectedRow ? `Edit ${title}` : `Add ${title}`}
-        >
+          title={selectedRow ? `Edit ${title}` : `Add ${title}`}>
           <InnerModalInputs formData={formData} setFormData={setFormData} />
         </CustomModal>
       )}
