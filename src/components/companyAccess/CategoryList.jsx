@@ -16,6 +16,7 @@ const CategoryList = ({ categories, toggleCategory, toggleSubcategory, selectedC
 
   return (
     <div className="bg-white p-4 rounded-md  w-full">
+      
       <ul>
         {categories.map((category) => (
           <li key={category.id} className="mb-3">
@@ -34,7 +35,7 @@ const CategoryList = ({ categories, toggleCategory, toggleSubcategory, selectedC
                     <ChevronRight className="w-4 h-4 text-gray-600" />
                   </motion.div>
                 ) : (
-                  <div className="w-4 h-4" /> // Empty space for alignment
+                  <div className="w-4 h-4" /> 
                 )}
                 <span>{category.name}</span>
               </div>

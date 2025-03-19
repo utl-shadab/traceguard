@@ -44,6 +44,7 @@ const menuItems = [
       },
     ],
   },
+
   {
     id: "product-config",
     label: "Product Config",
@@ -70,6 +71,24 @@ const menuItems = [
         id: "product-details",
         label: "Product Details",
         path: "/product-details",
+      },
+    ],
+  },
+  {
+    id: "Adminstration",
+    label: "Adminstration",
+    path: "#",
+    icon: <LucideShieldCheck size={20} />,
+    submenu: [
+      {
+        id: "user-master",
+        label: "User Master",
+        path: "/user-master",
+      },
+      {
+        id: "role-master",
+        label: "Role Master",
+        path: "/role-master",
       },
     ],
   },
@@ -273,7 +292,7 @@ function Sidebar() {
                           <li key={subitem.id}>
                             <Link
                               to={subitem.path}
-                              className={`flex items-center p-2 pl-5 rounded-md transition-all duration-600 ease-in-out 
+                              className={`flex items-center p-2 pl-5  rounded-md transition-all duration-600 ease-in-out 
                               ${
                                 isSubActive
                                   ? "bg-[#5D87FF] text-white"

@@ -2,41 +2,35 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp, Search } from "lucide-react";
 
-const companies = [
-  "Binario Technologies Pvt. Ltd.",
-  "HSA GOLD",
-  "Holoflex Limited",
-  "VIDEOJET TECHNOLOGIES INDIA",
-  "Bharat AgroTech Ltd.",
-];
-
-const CompanySelect = ({ selectCompany }) => {
+const CustomSelect = ({
+  options = [], 
+  value,
+  onChange, 
+  placeholder = "Select an option", 
+  className = "", 
+}) => {
   const [search, setSearch] = useState("");
-  const [selectedCompany, setSelectedCompany] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const filteredCompanies = companies.filter((company) =>
-    company.toLowerCase().includes(search.toLowerCase())
+  const filteredOptions = options.filter((option) =>
+    option.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleSelect = (company) => {
-    setSelectedCompany(company);
-    selectCompany(company);
+  const handleSelect = (option) => {
+    onChange(option); 
     setShowDropdown(false);
   };
 
   return (
-    <div className="relative w-full z-50">
-      {/* Dropdown Button */}
+    <div className={`relative w-full z-10 ${className}`}>
+      
       <button
         onClick={() => setShowDropdown(!showDropdown)}
         className="w-full p-3 cursor-pointer border rounded-md shadow bg-white flex justify-between items-center text-gray-700"
       >
-        {selectedCompany || "Select Company"}
+        {value || placeholder}
         {showDropdown ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
       </button>
-
-      {/* Dropdown List */}
       {showDropdown && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -44,30 +38,28 @@ const CompanySelect = ({ selectCompany }) => {
           exit={{ opacity: 0, y: -10 }}
           className="absolute top-12 left-0 w-full bg-white border rounded-md shadow-md max-h-60 overflow-y-auto"
         >
-          {/* Search Box */}
           <div className="relative p-2 border-b">
             <Search className="absolute left-5 top-5 text-gray-400" size={18} />
             <input
               type="text"
-              placeholder="Search company..."
+              placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-2 py-2 border rounded-md focus:outline-none"
             />
           </div>
 
-          {/* Company List */}
           <ul>
-            {filteredCompanies.length > 0 ? (
-              filteredCompanies.map((company) => (
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option) => (
                 <li
-                  key={company}
+                  key={option}
                   className={`p-3 text-gray-700 cursor-pointer hover:bg-gray-100 ${
-                    selectedCompany === company ? "bg-gray-200 font-semibold" : ""
+                    value === option ? "bg-gray-200 font-semibold" : ""
                   }`}
-                  onClick={() => handleSelect(company)}
+                  onClick={() => handleSelect(option)}
                 >
-                  {company}
+                  {option}
                 </li>
               ))
             ) : (
@@ -80,4 +72,4 @@ const CompanySelect = ({ selectCompany }) => {
   );
 };
 
-export default CompanySelect;
+export default CustomSelect;

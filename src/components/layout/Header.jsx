@@ -64,7 +64,8 @@ function Header() {
         
         {/* Notification Dropdown */}
         <div className="relative" ref={notificationRef}>
-          <button onClick={toggleNotification} className="relative flex items-center space-x-2 focus:outline-none">
+          {/* <button onClick={toggleNotification} className="relative flex  items-center space-x-2 focus:outline-none"> */}
+          <button onClick={toggleNotification} className="relative hidden  items-center space-x-2 focus:outline-none">
             <div className="relative">
               <div className="w-8 h-8 bg-[#EFF6FF] rounded-full flex items-center justify-center text-gray-700">
                 <Bell className="w-5 h-5" />

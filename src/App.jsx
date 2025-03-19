@@ -26,6 +26,8 @@ import WarrantyRegistration from './pages/WarrantyRegistration';
 import WarrantyApproval from './pages/WarrantyApproval';
 import WarrantyEnquiry from './pages/WarrantyEnquiry';
 import Login from './pages/Login';
+import UserMaster from './pages/UserMaster';
+import RoleMaster from './pages/RoleMaster';
 
 function PrivateRoute() {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
@@ -58,6 +60,8 @@ function App() {
           <Route path="/scheme-product-mapping" element={<SchemeProductMapping />} />
           <Route path="/catalogue-master" element={<CatalogueMaster />} />
           <Route path="/lucky-draw" element={<LuckyDraw />} />
+          <Route path="/user-master" element={<UserMaster />} />
+          <Route path="/role-master" element={<RoleMaster />} />
           <Route path="/redemption-approval" element={<RedemptionApproval />} />
           <Route path="/issue-number" element={<IssueNumber />} />
           <Route path="/generate-numbers" element={<GenerateNumbers />} />
