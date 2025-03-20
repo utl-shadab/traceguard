@@ -51,7 +51,7 @@ const Dashboard = () => {
         ))}
       </div>
       <QRCodeVolumeChart />
-      <DataTable />
+      {/* <DataTable data={cardData} /> */}
       {/* <CustomTable/> */}
     </div>
   )

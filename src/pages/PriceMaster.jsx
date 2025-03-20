@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DataTable from "../components/Tables/DataTable";
-import CustomModal from "../components/Modal/CustomModal"; 
+import CustomModal from "../components/Modal/CustomModal";
 
 // Sample Data
 const sampleData = [
@@ -33,13 +33,13 @@ const PriceMaster = () => {
         enableCSV={false}
         showActiveToggle={true}
         buttonLabel="Add Price"
-        onButtonClick={() => setIsModalOpen(true)} 
+        onButtonClick={() => setIsModalOpen(true)}
       />
 
       {/* Custom Modal */}
       <CustomModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)} 
+        onClose={() => setIsModalOpen(false)}
         title="Add Price"
         showDropdown={false}
         onSave={() => {
@@ -49,7 +49,7 @@ const PriceMaster = () => {
       >
         {/* Modal Content */}
         <div className="space-y-4 text-center">
-       add your data 
+          add your data
         </div>
       </CustomModal>
     </div>
