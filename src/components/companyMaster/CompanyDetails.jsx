@@ -207,7 +207,7 @@ const CompanyDetails = ({ formData, setFormData }) => {
             )}
             <div className="col-span-full w-full">
                 <Dropzone onUpload={handleUpload} />
-                {uploadedFile && <p className="mt-4 text-green-600">{uploadedFile}</p>}
+                {/* {uploadedFile && <p className="mt-4 text-green-600">{uploadedFile}</p>} */}
             </div>
         </form>
     )

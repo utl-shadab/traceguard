@@ -25,7 +25,7 @@ const FeedbackModal = ({ onClose }) => {
         <input type="text" placeholder="Phone" className="w-full mb-2 p-2 border rounded" />
         <textarea placeholder="Feedback" className="w-full mb-2 p-2 border rounded"></textarea>
 
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-md w-full mt-2" onClick={onClose}>
+        <button className="bg-[#5765F6] text-white px-4 py-2 rounded-md w-full mt-2" onClick={onClose}>
           Submit
         </button>
       </motion.div>

@@ -37,7 +37,7 @@ const ShareModal = ({ onClose }) => {
           />
           <button
             onClick={handleCopy}
-            className="bg-blue-600 text-white px-4 py-2 font-semibold"
+            className="bg-[#5765F6] text-white px-4 py-2 font-semibold"
           >
             {copySuccess ? "Copied!" : "Copy"}
           </button>

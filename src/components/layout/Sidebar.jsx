@@ -174,6 +174,7 @@ function Sidebar() {
   const { isCollapsed, isMobile, isSidebarOpen, toggleSidebar } = useSidebar();
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
+  
 
   const toggleMenu = (id) => {
     setOpenMenu((prev) => (prev === id ? null : id));

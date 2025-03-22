@@ -144,7 +144,7 @@ const ProductDetails = () => {
       {/* Save Button */}
       <div className="flex justify-center mt-4">
         <motion.button
-          className="w-fit bg-blue-600 cursor-pointer text-white py-2 px-6 rounded-md font-semibold hover:bg-blue-700 transition"
+          className="w-fit bg-[#5765F6] cursor-pointer text-white py-2 px-6 rounded-md font-semibold hover:bg-blue-700 transition"
           whileTap={{ scale: 0.95 }}
         >
           Save

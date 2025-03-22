@@ -91,7 +91,7 @@ const ProductDetails = () => {
 
       {/* Save Button */}
       <motion.button
-        className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition"
+        className="mt-4 w-full bg-[#5765F6] text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition"
         whileTap={{ scale: 0.95 }}
       >
         Save
