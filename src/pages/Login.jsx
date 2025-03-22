@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { LucideMail, LucideLock } from "lucide-react";
 import loginIllustration from "../assets/login-illustration.svg";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import InputField from "../components/ui/InputField";
 import Checkbox from "../components/ui/Checkbox";
 
