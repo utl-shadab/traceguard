@@ -34,7 +34,7 @@ const ReviewModal = ({ isOpen, onClose, onSubmit }) => {
                 {/* Modal Header */}
                 <div className="flex justify-between items-center">
                     <h2 className="text-xl font-bold text-[#5765F6]">Write a Review</h2>
-                    <button onClick={onClose}>
+                    <button onClick={onClose} className="text-black cursor-pointer">
                         <X size={20} />
                     </button>
                 </div>
