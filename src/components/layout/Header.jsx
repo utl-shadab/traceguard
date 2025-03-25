@@ -58,7 +58,7 @@ function Header() {
       </div>
       
       {/* Company name - hide on smallest screens */}
-      <div className="text-lg font-semibold text-gray-800 hidden sm:block">BINARIO TECHNOLOGIES</div>
+      {/* <div className="text-lg font-semibold text-gray-800 hidden sm:block">BINARIO TECHNOLOGIES</div> */}
       
       <div className="flex items-center space-x-6">
         
