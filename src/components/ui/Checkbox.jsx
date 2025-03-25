@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 const Checkbox = ({ checked, onChange, color = "blue" }) => {
 
+
   return (
     <div
       className={`relative w-6 h-6 flex items-center justify-center border-2 rounded-md cursor-pointer transition-all duration-300 

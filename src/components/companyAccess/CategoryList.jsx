@@ -6,12 +6,45 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 const CategoryList = ({ categories, toggleCategory, toggleSubcategory, selectedCategories }) => {
   const [openCategories, setOpenCategories] = useState({});
 
+  // const handleToggle = (categoryId) => {
+  //   setOpenCategories((prev) => ({
+  //     ...prev,
+  //     [categoryId]: !prev[categoryId],
+  //   }));
+  //   toggleCategory(categoryId);
+  // };
+
+
   const handleToggle = (categoryId) => {
     setOpenCategories((prev) => ({
       ...prev,
       [categoryId]: !prev[categoryId],
     }));
-    toggleCategory(categoryId);
+  };
+
+  // const handleCategorySelect = (categoryId, e) => {
+  //   e.stopPropagation();
+  //   toggleCategory(categoryId);
+  //   console.log(categoryId)
+  // };
+
+  const handleCategorySelect = (category, e) => {
+    e.stopPropagation(); // Prevents accordion toggle
+
+    const isChecked = selectedCategories.includes(category.id);
+
+    if (isChecked) {
+      // If unchecked, remove parent and all its subcategories
+      toggleCategory(category.id);
+      category.subcategories.forEach((sub) => {
+        if (selectedCategories.includes(sub.id)) {
+          toggleSubcategory(sub.id);
+        }
+      });
+    } else {
+      // If checked, only select the parent (not the subcategories)
+      toggleCategory(category.id);
+    }
   };
 
   return (
@@ -39,7 +72,9 @@ const CategoryList = ({ categories, toggleCategory, toggleSubcategory, selectedC
                 )}
                 <span>{category.name}</span>
               </div>
-              <Checkbox checked={selectedCategories.includes(category.id)} readOnly color="blue" />
+              <div onClick={(e) => handleCategorySelect(category, e)}>
+                <Checkbox checked={selectedCategories.includes(category.id)} color="blue" />
+              </div>
             </motion.div>
 
             {/* Subcategories (Accordion Effect) */}
@@ -63,9 +98,9 @@ const CategoryList = ({ categories, toggleCategory, toggleSubcategory, selectedC
                     >
                       <span>{sub.name}</span>
                       <Checkbox
-                        checked={!selectedCategories.includes(sub.id)}
+                        checked={selectedCategories.includes(sub.id)}
                         onChange={() => toggleSubcategory(sub.id)}
-                        readOnly
+
                         color="blue"
                       />
                     </motion.li>

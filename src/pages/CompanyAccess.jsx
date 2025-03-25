@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useAccess from "../hook/useAccess";
-import CompanySelect from "../components/companyAccess/CompanySelect";
 import CategoryList from "../components/companyAccess/CategoryList";
 import AccessList from "../components/companyAccess/AccessList";
 import ToggleAll from "../components/companyAccess/ToggleAll";

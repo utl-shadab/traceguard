@@ -36,7 +36,7 @@ const RoleMaster = () => {
         buttonLabel="Add Price"
         onButtonClick={() => setIsModalOpen(true)}
       />
-<CategoryManager/>
+      <CategoryManager/>
       {/* Custom Modal */}
       <CustomModal
         isOpen={isModalOpen}
