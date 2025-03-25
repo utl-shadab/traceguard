@@ -174,7 +174,6 @@ function Sidebar() {
   const { isCollapsed, isMobile, isSidebarOpen, toggleSidebar } = useSidebar();
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
-  
 
   const toggleMenu = (id) => {
     setOpenMenu((prev) => (prev === id ? null : id));
@@ -264,6 +263,7 @@ function Sidebar() {
                   ) : (
                     <Link
                       to={item.path}
+                      onClick={isMobile && toggleSidebar}
                       className={`flex items-center p-2.5 rounded-md transition-all duration-700 ease-in-out w-full ${
                         isActive
                           ? "bg-[#5765F6] text-white"
@@ -293,7 +293,8 @@ function Sidebar() {
                           <li key={subitem.id}>
                             <Link
                               to={subitem.path}
-                              className={`flex items-center p-2 pl-5  rounded-md transition-all duration-600 ease-in-out 
+                              onClick={!isMobile ? toggleMenu : toggleSidebar}
+                              className={`flex items-center p-2 px-5  rounded-md transition-all duration-600 ease-in-out 
                               ${
                                 isSubActive
                                   ? "bg-[#5D87FF] text-white"

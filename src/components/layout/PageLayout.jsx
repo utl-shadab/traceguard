@@ -12,10 +12,9 @@ function PageLayout() {
     <div className="flex h-screen bg-gray-100 overflow-hidden">
       {/* Sidebar */}
       <div
-        className={`transition-all duration-300 ${
-          isCollapsed ? "w-14" : "w-72"
-        } fixed md:relative h-full`}
-      >
+        className={`transition-all duration-300 z-10 ${
+          isCollapsed ? "w-14" : "md:w-72"
+        } md:relative h-full`}>
         <Sidebar />
       </div>
 
@@ -23,16 +22,14 @@ function PageLayout() {
       {isMobileOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 md:hidden"
-          onClick={() => toggleMobileSidebar()}
-        ></div>
+          onClick={() => toggleMobileSidebar()}></div>
       )}
 
       {/* Main Content */}
       <div
         className={`flex flex-col flex-1 transition-all duration-300 ${
           isCollapsed ? "md:w-[calc(100%-3.5rem)]" : "md:w-[calc(100%-18rem)]"
-        } w-full`}
-      >
+        } w-full`}>
         <Header />
         <div className="flex-1 overflow-auto px-4 py-6">
           <Breadcrumb backgroundImage={bannerImage} />
